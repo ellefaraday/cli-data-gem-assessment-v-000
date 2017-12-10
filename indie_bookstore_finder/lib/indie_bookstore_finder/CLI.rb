@@ -1,18 +1,32 @@
 class IndieBookstoreFinder::CLI
+  attr_accessor :states, :cities, :stores
+
+  def initialize
+    @states = {}
+    @cities = []
+    @stores = []
+  end
+
   def call
-    scraper = Scraper.new
+    @scraper = Scraper.new
+    @states = @scraper.get_states
     puts "Welcome to Indie Bookstore Finder"
     puts ""
     puts "Find an independent bookseller near you!"
-    state_page
+    state_page(@states)
   end
 
-  def state_page
-    print_states
-    state_page_instructions
+  def state_page(states)
+    print_states(states)
+    state_page_instructions(states)
   end
 
-  def state_page_instructions
+  def print_states(states)
+    states.each_with_index(1) do |state|
+      
+  end
+
+  def state_page_instructions(states)
     puts "Please select your state by entering the number from the list and pressing return."
     puts "To exit enter exit"
     state_number = gets.strip.to_i
@@ -48,9 +62,6 @@ class IndieBookstoreFinder::CLI
   end
 
   def print_cities(state)
-  end
-
-  def print_states
   end
 
   def store_list_page(city)
