@@ -4,11 +4,22 @@ class IndieBookstoreFinder::CLI
     puts "Welcome to Indie Bookstore Finder"
     puts ""
     puts "Find an independent bookseller near you!"
-    puts "Please select your state by entering the number from the list and pressing return."
     print_states
+    state_page
+  end
+
+  def state_page
+    puts "Please select your state by entering the number from the list and pressing return."
     puts "To exit enter exit"
-    gets.chomp
-    cities_page
+    input = gets.strip.to_i
+    if input == "exit"
+      puts "Thank you for shopping independent! Happy Reading!"
+    elsif input ==
+      cities_page
+    else
+      puts "Sorry, I don't recognize that input."
+      state_page
+    end
   end
 
   def cities_page
@@ -17,7 +28,8 @@ class IndieBookstoreFinder::CLI
     puts "Please select a city by entering its number from the list and pressing return."
     puts "To return to the list of states enter 'states'"
     puts "To exit enter exit"
-    gets.chomp
+    gets.strip.to_i
+    store_list_page
   end
 
   def print_cities
@@ -33,7 +45,13 @@ class IndieBookstoreFinder::CLI
     puts "To return to the list of cities in State enter 'cities'"
     puts "To return to the list of states enter 'states'"
     puts "To exit enter exit"
+    gets.strip.to_i
+    store_page
   end
+
+  def store_page
+  end
+
 
   def print_stores
   end
