@@ -2,7 +2,7 @@ class IndieBookstoreFinder::CLI
   attr_accessor :states, :cities, :stores
 
   def initialize
-    @states = {}
+    @states = []
     @cities = []
     @stores = []
   end
@@ -22,39 +22,40 @@ class IndieBookstoreFinder::CLI
   end
 
   def print_states(states)
-    states.each_with_index(1) do |state|
-      
+    states.each_with_index(1) do |state, index|
+      puts "#{index}. #{state.name}"
+    end
   end
 
   def state_page_instructions(states)
     puts "Please select your state by entering the number from the list and pressing return."
     puts "To exit enter exit"
-    state_number = gets.strip.to_i
+    state_number = gets.strip
     if state_number == "exit"
       exit_program
-    elsif #states includes state_number
-      cities_page(state_number)
+    elsif states[state_number.to_i - 1] != nil #this may give an error, what will this do if input is a string
+      cities_page(states[state_number.to_i - 1].cities)
     else
       input_error_message
       state_page
     end
   end
 
-  def cities_page(state)
+  def cities_page(cities)
     puts "We found independent bookstores in these cities in #{state_number}"
-    print_cities(state)
-    cities_page_instructions(state)
+    print_cities(cities)
+    cities_page_instructions(cities)
   end
 
-  def cities_page_instructions
+  def cities_page_instructions(cities)
     puts "Please select a city by entering its number from the list and pressing return."
     puts "To return to the list of states enter 'states'"
     puts "To exit enter exit"
-    city = gets.strip.to_i
-    if city = "exit"
+    city_number = gets.strip
+    if city_number = "exit"
       exit_program
-    elsif #cities includes city
-      store_list_page(city)
+    elsif cities[city_number.to_i - 1] != nil #this may give an error, what will this do if input is a string
+      store_list_page(cities[city_number.to_i - 1].stores)
     else
       input_error_message
       cities_page_instructions
