@@ -1,5 +1,5 @@
-require "indie_bookstore_finder/version"
+require_relative "../config/environment"
 
 module IndieBookstoreFinder
-  # Your code goes here...
+
 end
