@@ -2,7 +2,7 @@ class IndieBookstoreFinder::CLI
 
   def call
     @scraper = Scraper.new
-    @states = @scraper.get_states
+    @states = @scraper.scrape_index_page
     puts "Welcome to Indie Bookstore Finder"
     puts ""
     puts "Find an independent bookseller near you!"
@@ -28,7 +28,7 @@ class IndieBookstoreFinder::CLI
       exit_program
     elsif state_number.to_i != 0 && states[state_number.to_i - 1] != nil
       @selected_state = states[state_number.to_i - 1]
-      @scraper.get_cities(selected_state)
+      @scraper.scrape_state_page(@selected_state)
       cities_page(@selected_state.cities)
     else
       input_error_message
