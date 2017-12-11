@@ -6,12 +6,12 @@ class IndieBookstoreFinder::Scraper
 
   def scrape_index_page
     self.get_index_page.css("div.np-span6.centered-list a").each do |state|
-      new_state = State.new
+      new_state = IndieBookstoreFinder::State.new
       new_state.name = state.css.text.gsub(" Bookstores", "")
       new_state.url = state.css.attribute("href").value
-      States.all << new_state
+      IndieBookstoreFinder::States.all << new_state
     end
-    States.all
+    IndieBookstoreFinder::States.all
   end
 
   def get_state_page(state)
