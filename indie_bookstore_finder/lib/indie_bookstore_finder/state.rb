@@ -1,9 +1,14 @@
 class IndieBookstoreFinder::State
-  attr_accessor :name
+  attr_accessor :name, :url, :cities
 
-  def cities
-    #returns an array of city objects
+  @@all = []
+
+  def initialize
+    @cities = []
   end
 
+  def self.all
+    @@all
+  end
 
 end

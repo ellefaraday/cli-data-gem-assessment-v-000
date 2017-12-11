@@ -28,6 +28,7 @@ class IndieBookstoreFinder::CLI
       exit_program
     elsif state_number.to_i != 0 && states[state_number.to_i - 1] != nil
       @selected_state = states[state_number.to_i - 1]
+      @scraper.get_cities(selected_state)
       cities_page(@selected_state.cities)
     else
       input_error_message
@@ -82,7 +83,7 @@ class IndieBookstoreFinder::CLI
       cities_page(@selected_state.cities)
     elsif store_number == "states"
       state_page(@states)
-    elsif store_number.to_i != 0 && stores[store.to_i - 1] != nil 
+    elsif store_number.to_i != 0 && stores[store.to_i - 1] != nil
       @selected_store = stores[store.to_i - 1]
       store_page(@selected_store)
     else
