@@ -26,7 +26,7 @@ class IndieBookstoreFinder::CLI
     state_number = gets.strip
     if state_number == "exit"
       exit_program
-    elsif states[state_number.to_i - 1] != nil #this may give an error, what will this do if input is a string
+    elsif state_number.to_i != 0 && states[state_number.to_i - 1] != nil
       @selected_state = states[state_number.to_i - 1]
       cities_page(@selected_state.cities)
     else
@@ -50,8 +50,7 @@ class IndieBookstoreFinder::CLI
       exit_program
     elsif city_number == "states"
       state_page(@states)
-    elsif cities[city_number.to_i - 1] != nil #this may give an error, what will this do if input is a string
-      @selected_city = cities[city_number.to_i - 1]
+    elsif city_number.to_i != 0 && cities[city_number.to_i - 1] != nil
       store_list_page(@selected_city.stores)
     else
       input_error_message
@@ -76,14 +75,14 @@ class IndieBookstoreFinder::CLI
     puts "To return to the list of cities in #{@selected_state.name} enter 'cities'"
     puts "To return to the list of states enter 'states'"
     puts "To exit enter exit"
-    store = gets.strip
-    if store == "exit"
+    store_number = gets.strip
+    if store_number == "exit"
       exit_program
-    elsif store == "cities"
+    elsif store_number == "cities"
       cities_page(@selected_state.cities)
-    elsif store == "states"
+    elsif store_number == "states"
       state_page(@states)
-    elsif stores[store.to_i - 1] != nil #fix later
+    elsif store_number.to_i != 0 && stores[store.to_i - 1] != nil 
       @selected_store = stores[store.to_i - 1]
       store_page(@selected_store)
     else
