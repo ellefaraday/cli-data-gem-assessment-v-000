@@ -34,15 +34,16 @@ class IndieBookstoreFinder::CLI
     if state_number == "exit"
       exit_program
     elsif states[state_number.to_i - 1] != nil #this may give an error, what will this do if input is a string
-      cities_page(states[state_number.to_i - 1].cities)
+      @selected_state = states[state_number.to_i - 1]
+      cities_page(@selected_state.cities)
     else
       input_error_message
-      state_page
+      state_page_instructions(states)
     end
   end
 
   def cities_page(cities)
-    puts "We found independent bookstores in these cities in #{state_number}"
+    puts "We found independent bookstores in these cities in #{@selected_state.name}"
     print_cities(cities)
     cities_page_instructions(cities)
   end
@@ -52,67 +53,87 @@ class IndieBookstoreFinder::CLI
     puts "To return to the list of states enter 'states'"
     puts "To exit enter exit"
     city_number = gets.strip
-    if city_number = "exit"
+    if city_number == "exit"
       exit_program
+    elsif city_number == "states"
+      state_page(@states)
     elsif cities[city_number.to_i - 1] != nil #this may give an error, what will this do if input is a string
-      store_list_page(cities[city_number.to_i - 1].stores)
+      @selected_city = cities[city_number.to_i - 1]
+      store_list_page(@selected_city.stores)
     else
       input_error_message
-      cities_page_instructions
+      cities_page_instructions(cities)
     end
   end
 
-  def print_cities(state)
+  def print_cities(cities)
+    cities.each_with_index(1) do |city, index|
+      puts "#{index}. #{city.name}"
+    end
   end
 
-  def store_list_page(city)
-    puts "Here are the indie bookstores in #{City}, #{State}!"
-    print_stores(city)
+  def store_list_page(stores)
+    puts "Here are the indie bookstores in #{@selected_city.name}, #{@selected_state.name}!"
+    print_stores(stores)
+    store_list_page_instructions(stores)
   end
 
-  def store_list_page_instructions
+  def store_list_page_instructions(stores)
     puts "See more information about a store by entering its number from the list and pressing return."
-    puts "To return to the list of cities in State enter 'cities'"
+    puts "To return to the list of cities in #{@selected_state.name} enter 'cities'"
     puts "To return to the list of states enter 'states'"
     puts "To exit enter exit"
-    store = gets.strip.to_i
+    store = gets.strip
     if store == "exit"
       exit_program
     elsif store == "cities"
-      cities_page(state)
+      cities_page(@selected_state.cities)
     elsif store == "states"
-      state_page
-    elsif #stores includes store
-      store_page
+      state_page(@states)
+    elsif stores[store.to_i - 1] != nil #fix later
+      @selected_store = stores[store.to_i - 1]
+      store_page(@selected_store)
     else
       input_error_message
-      store_list_page_instructions
+      store_list_page_instructions(stores)
     end
   end
 
-  def store_page
+  def print_stores(stores)
+    stores.each_with_index(1) do |store, index|
+      puts "#{index}. #{store.name}"
+      puts "#{store.address}"
+      puts ""
+    end
+  end
+
+  def store_page(store)
+    print_store_details(store)
+    store_page_instructions(store)
+  end
+
+  def print_store_details(store)
     puts #store details
-    puts "To return to the list of stores in #{city} enter 'stores'"
-    puts "To return to the list of cities in #{state} enter 'cities'"
+  end
+
+  def store_page_instructions(store)
+    puts "To return to the list of stores in #{@selected_city.name} enter 'stores'"
+    puts "To return to the list of cities in #{@selected_state.name} enter 'cities'"
     puts "To return to the list of states enter 'states'"
     puts "To exit enter exit"
-    input = gets.strip.to_i
+    input = gets.strip
     if input == "exit"
       exit_program
     elsif input == "cities"
-      cities_page(state)
+      cities_page(@selected_state.cities)
     elsif input == "states"
-      state_page
+      state_page(@states)
     elsif input == "stores"
-      store_list_page(city)
+      store_list_page(@selected_city.stores)
     else
       input_error_message
-      store_page
+      store_page(store)
     end
-  end
-
-
-  def print_stores
   end
 
   def exit_program
