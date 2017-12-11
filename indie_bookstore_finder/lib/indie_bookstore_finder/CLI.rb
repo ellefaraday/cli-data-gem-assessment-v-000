@@ -1,11 +1,4 @@
 class IndieBookstoreFinder::CLI
-  attr_accessor :states, :cities, :stores
-
-  def initialize
-    @states = []
-    @cities = []
-    @stores = []
-  end
 
   def call
     @scraper = Scraper.new
@@ -113,7 +106,35 @@ class IndieBookstoreFinder::CLI
   end
 
   def print_store_details(store)
-    puts #store details
+    puts "#{store.name}"
+    puts "#{store.address}"
+    if store.phone != nil
+      puts "Phone: #{store.phone}"
+    end
+    if store.type != nil
+      puts "Type: #{store.type}"
+    end
+    if store.specialty != nil
+      puts "Specialty: #{store.specialty}"
+    end
+    if store.sidelines != nil
+      puts "Sidelines: #{store.sidelines}"
+    end
+    if store.events != nil
+      puts "Events: #{store.events}"
+    end
+    if store.website != nil
+      puts "Website: #{store.website}"
+    end
+    if store.facebook != nil
+      puts "Facebook: #{store.facebook}"
+    end
+    if store.twitter != nil
+      puts "Twitter: #{store.twitter}"
+    end
+    if store.description != nil
+      puts "Description: #{store.description}"
+    end
   end
 
   def store_page_instructions(store)
