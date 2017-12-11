@@ -1,5 +1,5 @@
 class IndieBookstoreFinder::Store
-  attr_accessor :name, :address, :phone, :type, :specialty, :sidelines, :events, :website, :facebook, :twitter, :description
+  attr_accessor :name, :address, :phone, :type, :specialty, :sidelines, :events, :website, :facebook, :twitter, :description, :city, :state
 
   def initialize
     @name = nil

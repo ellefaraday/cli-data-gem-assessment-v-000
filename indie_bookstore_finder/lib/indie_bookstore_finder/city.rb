@@ -1,9 +1,9 @@
 class IndieBookstoreFinder::City
 
-  attr_accessor :name
+  attr_accessor :name, :stores, :state
 
-  def stores
-    #returns an array of store objects
+  def initialize
+    @stores = []
   end
 
 end
