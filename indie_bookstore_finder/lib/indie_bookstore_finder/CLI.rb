@@ -5,7 +5,7 @@ class IndieBookstoreFinder::CLI
     @states = @scraper.scrape_index_page
     puts "Welcome to Indie Bookstore Finder".cyan
     puts "-----------------------"
-    puts "Shopping independent improves out communities!".magenta
+    puts "Shopping independent improves our communities!".magenta
     puts "Hit return to get started finding an independent bookseller near you.".magenta
     input = gets
     state_page(@states)
@@ -26,7 +26,7 @@ class IndieBookstoreFinder::CLI
     puts "----------------------------------"
     puts "Please select your state by entering the number from the list and pressing return.".red
     puts "To exit enter 'exit'".red
-    state_number = gets.strip
+    state_number = gets.strip.downcase
     if state_number == "exit"
       exit_program
     elsif state_number.to_i != 0 && states[state_number.to_i - 1] != nil
@@ -52,7 +52,7 @@ class IndieBookstoreFinder::CLI
     puts "Please select a city by entering its number from the list and pressing return.".red
     puts "To return to the list of states enter 'states'".red
     puts "To exit enter 'exit'".red
-    city_number = gets.strip
+    city_number = gets.strip.downcase
     if city_number == "exit"
       exit_program
     elsif city_number == "states"
@@ -84,7 +84,7 @@ class IndieBookstoreFinder::CLI
     puts "To return to the list of cities in #{@selected_state.name} enter 'cities'".red
     puts "To return to the list of states enter 'states'".red
     puts "To exit enter 'exit'".red
-    store_number = gets.strip
+    store_number = gets.strip.downcase
     if store_number == "exit"
       exit_program
     elsif store_number == "cities"
@@ -152,7 +152,7 @@ class IndieBookstoreFinder::CLI
     puts "To return to the list of cities in #{@selected_state.name} enter 'cities'".red
     puts "To return to the list of states enter 'states'".red
     puts "To exit enter 'exit'".red
-    input = gets.strip
+    input = gets.strip.downcase
     if input == "exit"
       exit_program
     elsif input == "cities"
