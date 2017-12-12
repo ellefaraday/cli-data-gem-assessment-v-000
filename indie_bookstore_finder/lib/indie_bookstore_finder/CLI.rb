@@ -52,6 +52,7 @@ class IndieBookstoreFinder::CLI
     elsif city_number == "states"
       state_page(@states)
     elsif city_number.to_i != 0 && cities[city_number.to_i - 1] != nil
+      @selected_city = cities[city_number.to_i - 1]
       store_list_page(@selected_city.stores)
     else
       input_error_message
@@ -93,8 +94,8 @@ class IndieBookstoreFinder::CLI
   end
 
   def print_stores(stores)
-    stores.each_with_index(1) do |store, index|
-      puts "#{index}. #{store.name}"
+    stores.each_with_index do |store, index|
+      puts "#{index + 1}. #{store.name}"
       puts "#{store.address}"
       puts ""
     end
