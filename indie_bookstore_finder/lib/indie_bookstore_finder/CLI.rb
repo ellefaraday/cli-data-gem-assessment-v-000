@@ -84,8 +84,8 @@ class IndieBookstoreFinder::CLI
       cities_page(@selected_state.cities)
     elsif store_number == "states"
       state_page(@states)
-    elsif store_number.to_i != 0 && stores[store.to_i - 1] != nil
-      @selected_store = stores[store.to_i - 1]
+    elsif store_number.to_i != 0 && stores[store_number.to_i - 1] != nil
+      @selected_store = stores[store_number.to_i - 1]
       store_page(@selected_store)
     else
       input_error_message
