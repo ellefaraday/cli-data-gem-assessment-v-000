@@ -18,14 +18,14 @@ class IndieBookstoreFinder::Scraper
     Nokogiri::HTML(open("#{state.url}"))
   end
 
-  def scraper_state_page(state)
-    self.get_state_page(state).css("div.bookstore").each do |bookstore|
+  def scrape_state_page(state)
+    self.get_state_page(state).css("div.catItemBody").each do |bookstore|
       bookstore.css("ul li").each do |item|
         if item.css("span:first-child").text == "City Title"
           @new_city = IndieBookstoreFinder::City.new
           @new_city.name = item.css("span:last-child").text
           state.cities << @new_city
-          IndieBookstoreFinder::Cities.all << @new_city
+          IndieBookstoreFinder::City.all << @new_city
         elsif item.css("span:first-child").text == "Title Link"
           @new_store = IndieBookstoreFinder::Store.new
           @new_store.name = item.css("span:last-child a").text
