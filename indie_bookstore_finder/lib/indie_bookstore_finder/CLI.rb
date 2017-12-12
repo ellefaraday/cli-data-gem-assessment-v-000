@@ -1,7 +1,7 @@
 class IndieBookstoreFinder::CLI
 
   def call
-    @scraper = Scraper.new
+    @scraper = IndieBookstoreFinder::Scraper.new
     @states = @scraper.scrape_index_page
     puts "Welcome to Indie Bookstore Finder"
     puts ""
@@ -15,8 +15,8 @@ class IndieBookstoreFinder::CLI
   end
 
   def print_states(states)
-    states.each_with_index(1) do |state, index|
-      puts "#{index}. #{state.name}"
+    states.each_with_index do |state, index|
+      puts "#{index + 1}. #{state.name}"
     end
   end
 
