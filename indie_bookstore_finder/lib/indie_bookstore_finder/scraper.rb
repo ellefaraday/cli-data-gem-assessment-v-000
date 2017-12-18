@@ -19,9 +19,10 @@ class IndieBookstoreFinder::Scraper
   end
 
   def scrape_state_page(state)
+    @new_city = nil
     self.get_state_page(state).css("div.catItemBody").each do |bookstore|
       bookstore.css("ul li").each do |item|
-        if item.css("span:first-child").text == "City Title"
+        if item.css("span:first-child").text == "City Title" && (@new_city == nil || @new_city.name != item.css("span:last-child").text)
           @new_city = IndieBookstoreFinder::City.new
           @new_city.name = item.css("span:last-child").text
           state.cities << @new_city
