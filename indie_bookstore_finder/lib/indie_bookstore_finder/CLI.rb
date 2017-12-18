@@ -47,6 +47,12 @@ class IndieBookstoreFinder::CLI
     cities_page_instructions(cities)
   end
 
+  def print_cities(cities)
+    cities.each_with_index do |city, index|
+      puts "#{index + 1}. #{city.name}".blue
+    end
+  end
+
   def cities_page_instructions(cities)
     puts "----------------------------------"
     puts "Please select a city by entering its number from the list and pressing return.".red
@@ -66,16 +72,18 @@ class IndieBookstoreFinder::CLI
     end
   end
 
-  def print_cities(cities)
-    cities.each_with_index do |city, index|
-      puts "#{index + 1}. #{city.name}".blue
-    end
-  end
-
   def store_list_page(stores)
     puts "Here are the indie bookstores in #{@selected_city.name}, #{@selected_state.name}!".cyan
     print_stores(stores)
     store_list_page_instructions(stores)
+  end
+
+  def print_stores(stores)
+    stores.each_with_index do |store, index|
+      puts "#{index + 1}. #{store.name}".magenta
+      puts "#{store.address}"
+      puts ""
+    end
   end
 
   def store_list_page_instructions(stores)
@@ -97,14 +105,6 @@ class IndieBookstoreFinder::CLI
     else
       input_error_message
       store_list_page_instructions(stores)
-    end
-  end
-
-  def print_stores(stores)
-    stores.each_with_index do |store, index|
-      puts "#{index + 1}. #{store.name}".magenta
-      puts "#{store.address}"
-      puts ""
     end
   end
 
