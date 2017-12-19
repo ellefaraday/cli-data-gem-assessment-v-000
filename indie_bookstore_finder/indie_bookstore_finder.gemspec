@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Elle Faraday'"]
   spec.email         = ["'faraday.elle@gmail.com'"]
 
-  spec.summary       = %q{Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
+  spec.summary       = %q{Scraper CLI to find independent bookstores by state and city.}
   spec.homepage      = "https://github.com/ellefaraday/cli-data-gem-assessment-v-000/"
   spec.license       = "MIT"
 
