@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["'faraday.elle@gmail.com'"]
 
   spec.summary       = %q{Scraper CLI to find independent bookstores by state and city.}
-  spec.homepage      = "https://github.com/ellefaraday/cli-data-gem-assessment-v-000/"
+  spec.homepage      = "https://github.com/ellefaraday/indie-bookstore-finder/"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
