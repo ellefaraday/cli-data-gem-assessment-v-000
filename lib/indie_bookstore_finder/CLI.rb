@@ -1,8 +1,8 @@
 class IndieBookstoreFinder::CLI
 
   def call
-    @scraper = IndieBookstoreFinder::Scraper.new
-    @states = @scraper.scrape_index_page
+    IndieBookstoreFinder::Scraper.new.scrape_index_page
+    @states = IndieBookstoreFinder::State.all
     puts "Welcome to Indie Bookstore Finder".cyan
     puts "-----------------------"
     puts "Shopping independent improves our communities!".magenta
@@ -21,6 +21,14 @@ class IndieBookstoreFinder::CLI
       puts "#{index + 1}. #{state.name}".blue
     end
   end
+
+  # def print_states_by_number(states, list_number)
+  #   i = 0
+  #   while i < list_number
+  #     puts "#{i + 1}. #{states[i].name}".blue
+  #     i += 1
+  #   end
+  # end
 
   def state_page_instructions(states)
     puts "----------------------------------"

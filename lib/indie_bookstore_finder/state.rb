@@ -3,8 +3,11 @@ class IndieBookstoreFinder::State
 
   @@all = []
 
-  def initialize
+  def initialize(name, url)
+    @name = name
+    @url = url
     @cities = []
+    @@all << self
   end
 
   def self.all
