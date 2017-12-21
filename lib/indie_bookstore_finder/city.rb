@@ -3,7 +3,8 @@ class IndieBookstoreFinder::City
   attr_accessor :name, :stores, :state
   @@all = []
 
-  def initialize
+  def initialize(name)
+    @name = name
     @stores = []
   end
 
